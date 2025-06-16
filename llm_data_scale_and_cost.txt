@@ -1,0 +1,42 @@
+The Scale of Data and Cost for Foundational LLMs
+
+Foundational Large Language Models (LLMs) are distinguished by their immense scale, not only in terms of the number of parameters they possess but also the vast datasets they are trained on and the correspondingly high computational costs.
+
+1. Examples of Foundational Models and Their Training Dataset Sizes:
+
+The training datasets for foundational LLMs are typically measured in hundreds of billions to trillions of tokens, or terabytes (TB) to petabytes (PB) of text data. A token can be thought of as a word or sub-word unit.
+
+Here are some prominent examples, with approximate dataset sizes (it's important to note that exact, directly comparable figures can be hard to pinpoint as reporting standards vary, and some information is proprietary):
+
+    - GPT-1 (OpenAI, 2018): Trained on BookCorpus, approximately 4.5GB of text, which translates to roughly 5 billion tokens (though often cited as 1 billion words initially).
+    - BERT (Google, 2018): Trained on the BookCorpus (800M words) and English Wikipedia (2,500M words), totaling around 3.3 billion words.
+    - GPT-2 (OpenAI, 2019): Trained on WebText, a dataset of 40GB of text (approximately 10 billion tokens according to some estimations, though not officially confirmed at that token count by OpenAI initially).
+    - T5 (Google, 2019): Trained on the "Colossal Clean Crawled Corpus" (C4), which is about 750GB, and used 34 billion tokens for its pre-training mixture.
+    - GPT-3 (OpenAI, 2020): Trained on a mix of datasets including Common Crawl, WebText2, Books1, Books2, and Wikipedia. The total dataset size was around 45TB of uncompressed plaintext before filtering, and it was trained on approximately 300 billion tokens (after filtering and weighting). Some sources mention up to 570GB of cleaned data.
+    - Gopher (DeepMind, 2021): Trained on a dataset called MassiveText, containing 300 billion tokens (approximately 2.35 TB of text).
+    - LaMDA (Google, 2022): Trained on a dataset of 1.56 trillion words from public web documents and dialog data, and 168 billion tokens.
+    - Chinchilla (DeepMind, 2022): Specifically designed to explore optimal model and data scaling. Trained on 1.4 trillion tokens (part of the MassiveText dataset). This model highlighted that many previous large models might have been "undertrained" relative to their size, suggesting the need for even more data.
+    - PaLM (Pathways Language Model, Google, 2022): Trained on a high-quality corpus of 768 billion tokens, comprising web documents, books, Wikipedia, news articles, and source code. This dataset was approximately 3.6 TB.
+    - BLOOM (Large collaboration led by Hugging Face, 2022): Trained on the ROOTS corpus, a multilingual dataset of 1.6TB, containing 350 billion tokens across 46 natural languages and 13 programming languages.
+    - LLaMA (Meta AI, 2023): The LLaMA family models were trained on datasets ranging up to 1.4 trillion tokens for the largest models (e.g., LLaMA 65B). Llama 2 models were trained on 2 trillion tokens.
+    - GPT-4 (OpenAI, 2023): While the exact size and composition of GPT-4's training data are not publicly disclosed by OpenAI, it is understood to be significantly larger than GPT-3's, likely in the order of trillions of tokens, drawing from an even more extensive and diverse range of text and potentially code. Estimates of training compute (see below) suggest a dataset size that could be in the range of 10-50 trillion tokens, though this is speculative.
+
+2. Discussion of Associated High Training Costs:
+
+The immense scale of these datasets, combined with the complexity of the models (billions to over a trillion parameters), leads to extraordinarily high training costs. These costs are primarily driven by the need for massive computational resources:
+
+    - Computational Power (FLOPs): Training involves a colossal number of floating-point operations (FLOPs). For instance:
+        - GPT-3 (175B parameters) training is estimated to have required around 3,640 petaFLOP-days. (A petaFLOP-day is 10^15 FLOPs per second for one day).
+        - PaLM (540B parameters) training took approximately 29,250 petaFLOP-days.
+        - Llama 2 (70B) is reported to have taken 21,000 petaFLOP-days and 1.7 million A100-GPU hours.
+        - Nemotron-4 (Nvidia, 340B) was trained on 9 trillion tokens and took 200,000 petaFLOP-days, using 6,144 H100 GPUs for months.
+
+    - Specialized Hardware (GPUs/TPUs): These operations are performed on large clusters of specialized hardware like NVIDIA GPUs (e.g., A100s, H100s) or Google TPUs. A single training run can require hundreds or thousands of these processors running in parallel for weeks or months. For example, PaLM's training utilized around 6,000 TPU v4 chips for approximately 60 days.
+
+    - Energy Consumption: Powering these large compute clusters for extended periods results in substantial energy consumption, contributing significantly to the overall cost and also raising environmental concerns. Training BERT was estimated to have a carbon footprint comparable to a trans-American flight. Larger models like GPT-3 would have a significantly higher footprint.
+
+    - Infrastructure and Engineering: Beyond the direct hardware and energy costs, there are expenses related to the infrastructure (data centers, networking) and the highly skilled personnel required to design, implement, and manage these training processes.
+
+    - Financial Costs: While exact figures are often not disclosed, estimates for training large foundational models range from millions to tens of millions, or even hundreds of millions of dollars for the very largest and most capable models. For example, the training cost for GPT-3 was estimated to be in the range of $5-12 million in 2020. More recent and larger models would cost substantially more. The DBRX model from Databricks (136B parameters, 12T tokens) reportedly cost around $10 million to train.
+
+The trend has been towards using even larger datasets and more computation, driven by "scaling laws" which suggest that model performance improves with more data, larger models, and more compute. However, there's also active research into more data-efficient training methods and smaller, yet highly capable, models (like Microsoft's Phi series) to mitigate these escalating costs and resource demands. The quality of data, as discussed previously, is also a critical factor in making the most of these extensive computational efforts.
